@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import './App.css';
 import Video from "./assets/videoBg.mp4"
 import { TextChanger } from './components/textChanger';
-
+import { Popup } from './components/popup';
 
 // Import the functions you need from the SDKs you need
 
@@ -13,45 +14,25 @@ import { TextChanger } from './components/textChanger';
 
 
 function App() {
+    const [clicked, setClicked] = useState(false)
 
+    const clickButton = () => {
 
-
+        setClicked(true)
+    }
     
     return (
             <div style={{overflow: "clip", overflowY: "hidden",overflowX: "hidden", backgroundColor: "black"}}>
                 
-                <video src={Video} autoPlay loop muted
-                style={{
-                    objectFit: "cover",
-                    width: "110w",
-                    height: "110vh",
-                    filter: "blur(20px)",
-                    
-
-                }}
-                />
-                <div className="App" 
-                style = {{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    top: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    objectFit: "fill",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    }} >
-                        
-                    <div className='transparent-box'> 
-                        <div>
+                <video className="video" src={Video} autoPlay loop muted/>
+                <div className="App" >   
+                    <div> 
+                        <div   onClick={()=> {clickButton()}} >
                             {/* <h1 className='tbox-text'>Message Ninja Click here</h1> */}
-                            <TextChanger/>
+                            {clicked?  <Popup/> : <TextChanger/> }
                             
                         </div>
                     </div>
-                    {/* <AppOverlay />    */}
-                    
                 </div>
             </div>
     );

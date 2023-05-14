@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BiRightArrowAlt, BiLeftArrowAlt } from "react-icons/bi"
 
 export const TextChanger = () => {
   const [text, setText] = useState("Message Ninja");
@@ -6,9 +7,9 @@ export const TextChanger = () => {
 
   // Array of text options
   const textOptions = [
-    "GPT4 powered messaging",
-    "1 second personalisation",
-    "Slice through lead gen",
+    "GPT4 Powered Messaging",
+    "1 Second Personalisation",
+    "Slice Through Lead Gen",
   ];
 
   useEffect(() => {
@@ -22,5 +23,17 @@ export const TextChanger = () => {
     return () => clearInterval(interval);
   }, [index, textOptions]);
 
-  return <h1 className="tbox-text">{text}</h1>;
+  return (
+    <div >
+      <h1 className="unselectable">{text}</h1>
+      <div className="container">
+        <BiRightArrowAlt/>
+        <h2 className="tbox-text unselectable">Login Here</h2>
+        <BiLeftArrowAlt/>
+      </div>
+      
+    </div>
+
+  )
+  
 };
