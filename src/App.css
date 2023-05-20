@@ -9,12 +9,40 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     align-items: center;
     padding: 1% 5% 1% 5%;
     transition: background-color 0.3s ease;
-    height: 600px;
+    height: 500px;
     width: 400px;
     backdrop-filter: blur(30px);
     /* box-shadow: 0 0 30px 20px rgba(211, 211, 211, 0.05); */
     }
+    
+.pageTitle {
+    position: absolute;
+    top: 10px;
+    color: white;
+    font-size: 3em;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+}
 
+.topRightButton {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(141, 141, 141);
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    z-index: 10;
+}
+    
+.topRightButton:hover {
+    background-color: #555;
+}
+    
 
 .video {
     object-fit: cover;
@@ -63,7 +91,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     justify-content: center;
     align-items: center;
 }
-
+    
 .App-logo {
     height: 40vmin;
     pointer-events: none;

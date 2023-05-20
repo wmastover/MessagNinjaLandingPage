@@ -23,9 +23,10 @@ function App() {
     
     return (
             <div style={{overflow: "clip", overflowY: "hidden",overflowX: "hidden", backgroundColor: "black"}}>
-                
                 <video className="video" src={Video} autoPlay loop muted/>
                 <div className="App" >   
+                <h1 className='pageTitle'>Message Ninja</h1>
+                <button className='topRightButton' onClick={clickButton}>Log In</button>
                     <div> 
                         <div   onClick={()=> {clickButton()}} >
                             {/* <h1 className='tbox-text'>Message Ninja Click here</h1> */}
