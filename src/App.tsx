@@ -1,42 +1,52 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import Video from "./assets/videoBg.mp4"
 import { TextChanger } from './components/textChanger';
 import { Popup } from './components/popup';
 
-// Import the functions you need from the SDKs you need
+const App = (): JSX.Element => {
+  const [clicked, setClicked] = useState<boolean>(false)
+  const [index, setIndex] = useState<number>(0);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const tolerance = 0.1; // Let's assume the tolerance is 0.1 seconds
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+  const clickButton = () => {
+    setClicked(true)
+  }
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  useEffect(() => {
+    const videoEl = videoRef.current;
 
+    if (!videoEl) return; 
 
-function App() {
-    const [clicked, setClicked] = useState(false)
-
-    const clickButton = () => {
-
-        setClicked(true)
+    const checkForLoop = () => {
+      // If video has looped to start (considering the tolerance)
+      if (videoEl.currentTime <= tolerance) {
+        setIndex(prevIndex => (prevIndex + 1) % 3);
+      }
     }
-    
-    return (
-            <div style={{overflow: "clip", overflowY: "hidden",overflowX: "hidden", backgroundColor: "black"}}>
-                <video className="video" src={Video} autoPlay loop muted/>
-                <div className="App" >   
-                <h1 className='pageTitle'>Message Ninja</h1>
-                <button className='topRightButton' onClick={clickButton}>Log In</button>
-                    <div> 
-                        <div   onClick={()=> {clickButton()}} >
-                            {/* <h1 className='tbox-text'>Message Ninja Click here</h1> */}
-                            {clicked?  <Popup/> : <TextChanger/> }
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-    );
+
+    videoEl.addEventListener('timeupdate', checkForLoop);
+
+    return () => videoEl.removeEventListener('timeupdate', checkForLoop);
+
+  }, []);
+
+  return (
+    <div style={{ overflow: "clip", overflowY: "hidden", overflowX: "hidden", backgroundColor: "black" }}>
+      <video className="video" src={Video} autoPlay loop muted ref={videoRef} />
+      <div className="App">
+        <h1 className='pageTitle'>Message Ninja</h1>
+        <h3 className='pageSubTitle'>Personalised messages in one click</h3>
+        <button className='topRightButton' onClick={clickButton}>Log In</button>
+        <div>
+          <div onClick={() => { clickButton() }} >
+            {clicked ? <Popup /> : <TextChanger index={index} />}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default App;

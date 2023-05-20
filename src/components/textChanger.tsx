@@ -1,39 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { BiRightArrowAlt, BiLeftArrowAlt } from "react-icons/bi"
+import React from "react";
+import { BsClipboard } from "react-icons/bs"
+import {TfiReload} from "react-icons/tfi"
 
-export const TextChanger = () => {
-  const [text, setText] = useState("Message Ninja");
-  const [index, setIndex] = useState(0);
+type TextChangerProps = {
+  index: number;
+};
 
-  // Array of text options
+export const TextChanger: React.FC<TextChangerProps> = ({ index }) => {
   const textOptions = [
-    "GPT4 Powered Messaging",
-    "1 Second Personalisation",
-    "Slice Through Lead Gen",
-  ];
-
-  useEffect(() => {
-    // Set up the interval
-    const interval = setInterval(() => {
-      setText(textOptions[index]);
-      setIndex((index + 1) % textOptions.length);
-    }, 5642.449); // Change every 4 seconds
-
-    // Clean up the interval on unmount
-    return () => clearInterval(interval);
-  }, [index, textOptions]);
+    "Hey Bill! Impressive journey from Microsoft to the Bill & Melinda Gates Foundation!",
+    "Hey @MrBeast, you are doing amazing work opening homeless shelters/food banks.",
+    "Hey @ShaanVP, really enjoyed reading your thread on semi-controversial topics!",  ];
 
   return (
-    <div >
-      <h1 className="unselectable">{text}</h1>
-      <div className="container">
-        <BiRightArrowAlt/>
-        <h2 className="tbox-text unselectable">Login Here</h2>
-        <BiLeftArrowAlt/>
+    <div className='chromeExtension'>
+      <h2 className='heading unselectable'>Message Ninja </h2>
+      <div className='textBox' >
+        <p className='unselectable'>{textOptions[index]}</p>
       </div>
-      
+      <div style={{
+        display: "flex",
+        flexDirection: "row"
+      }}>
+        <button className="button" >
+          <BsClipboard />
+        </button>
+        <button className="button" >
+          <TfiReload />  
+        </button> 
+      </div>
     </div>
-
   )
-  
 };
+
+
+
+
