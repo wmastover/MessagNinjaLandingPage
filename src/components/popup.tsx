@@ -14,7 +14,7 @@ export const Popup = () => {
       {user ? (
         <div className="transparent-box">
           <h1 className="pageSubTitle unselectable">Welcome back, {user.displayName}!</h1>
-          
+          <p style={{color:"white", fontWeight:"bold"}}>Open the message ninja chrome extension to logIn</p>
         </div>
       ) : (
         <div className="transparent-box">
