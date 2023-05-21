@@ -96,7 +96,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     align-items: center;
     justify-content: center;
     border-radius: 5px 5px 5px 5px;
-    border: 1px solid #000000;;
+    border: 2px solid #000000;;
     }
 
 .heading {
@@ -114,7 +114,8 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     text-align: center;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #000000;;
+    border: 2px solid #000000;
+    font-weight: bold;
     }
 
 .button {
@@ -123,7 +124,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     margin: 20px;
     padding: 10px 30px 10px 30px;
     border-radius: 4px;
-    border: 1px solid #000000;;
+    border: 2px solid #000000;;
     font-size: 1rem;
     }
 

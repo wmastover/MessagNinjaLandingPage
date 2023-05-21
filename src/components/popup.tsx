@@ -10,11 +10,14 @@ export const Popup = () => {
 
 
   return (
-    <div className="transparent-box">
+    <div>
       {user ? (
-        <h1 className="pageSubTitle unselectable">Welcome back, {user.displayName}!</h1>
+        <div className="transparent-box">
+          <h1 className="pageSubTitle unselectable">Welcome back, {user.displayName}!</h1>
+          
+        </div>
       ) : (
-        <div>
+        <div className="transparent-box">
           <h1 className="pageSubTitle unselectable">Login / Signup</h1>
           <GoogleSignInButton />
         </div>

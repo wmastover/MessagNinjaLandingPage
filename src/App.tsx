@@ -3,15 +3,26 @@ import './App.css';
 import Video from "./assets/videoBg.mp4"
 import { TextChanger } from './components/textChanger';
 import { Popup } from './components/popup';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
+import React from 'react';
+import { LogInButton } from './components/logInButton';
+import { LogoutButton } from './components/logOutButton';
+
 
 const App = (): JSX.Element => {
   const [clicked, setClicked] = useState<boolean>(false)
   const [index, setIndex] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const user = useSelector((state: RootState) => state.auth.user);
   const tolerance = 0.1; // Let's assume the tolerance is 0.1 seconds
 
-  const clickButton = () => {
+  const clickLoginButton = () => {
     setClicked(true)
+  }
+
+  const clickLogOutButton = () => {
+    setClicked(false)
   }
 
   useEffect(() => {
@@ -38,9 +49,10 @@ const App = (): JSX.Element => {
       <div className="App">
         <h1 className='pageTitle'>Message Ninja</h1>
         <h3 className='pageSubTitle'>Personalised messages in one click</h3>
-        <button className='topRightButton' onClick={clickButton}>Log In</button>
+        {user?  <LogoutButton setClicked={setClicked}/> : <LogInButton setClicked={setClicked}/> }
+        {/* <button className='topRightButton' onClick={clickButton}>Log In</button> */}
         <div>
-          <div onClick={() => { clickButton() }} >
+          <div onClick={() => { clickLoginButton() }} >
             {clicked ? <Popup /> : <TextChanger index={index} />}
           </div>
         </div>
