@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from '../redux/store';
 import { GoogleSignInButton } from "./googleSignInButton";
@@ -16,7 +16,6 @@ export const Popup = () => {
           <h1 className="pageSubTitle unselectable">Welcome back, {user.displayName}!</h1>
           <p style={{color:"white", fontWeight:"bold"}}>Open the message ninja chrome extension to logIn</p>
           <div style={{display: "none"}} id="authenticationToken">{token}</div>
-          <div style={{display: "none"}} id="apiKey">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</div>
         </div>
       ) : (
         <div className="transparent-box">
