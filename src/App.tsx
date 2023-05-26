@@ -8,6 +8,7 @@ import { RootState } from './redux/store';
 import React from 'react';
 import { LogInButton } from './components/logInButton';
 import { LogoutButton } from './components/logOutButton';
+import { Helmet } from 'react-helmet'
 
 
 const App = (): JSX.Element => {
@@ -45,6 +46,10 @@ const App = (): JSX.Element => {
 
   return (
     <div style={{ overflow: "clip", overflowY: "hidden", overflowX: "hidden", backgroundColor: "black" }}>
+      {/* this edits the name and icon displayed on the chrome tab */}
+      <Helmet>
+        <title>Message Ninja</title>
+      </Helmet>
       <video className="video" src={Video} autoPlay loop muted ref={videoRef} />
       <div className="App">
         <h1 className='pageTitle'>Message Ninja</h1>
