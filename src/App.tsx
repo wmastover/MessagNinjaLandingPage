@@ -45,22 +45,19 @@ const App = (): JSX.Element => {
   }, []);
 
   return (
-    <div style={{ overflow: "clip", overflowY: "hidden", overflowX: "hidden", backgroundColor: "black" }}>
+    <div className='yellowBox'>
       {/* this edits the name and icon displayed on the chrome tab */}
       <Helmet>
         <title>Message Ninja</title>
       </Helmet>
-      <video className="video" src={Video} autoPlay loop muted ref={videoRef} />
+      
       <div className="App">
-        <h1 className='pageTitle'>Message Ninja</h1>
-        <h3 className='pageSubTitle'>Personalised messages in one click</h3>
+
         {user?  <LogoutButton setClicked={setClicked}/> : <LogInButton setClicked={setClicked}/> }
-        {/* <button className='topRightButton' onClick={clickButton}>Log In</button> */}
-        <div>
-          <div onClick={() => { clickLoginButton() }} >
-            {clicked ? <Popup /> : <TextChanger index={index} />}
-          </div>
-        </div>
+       
+        
+        <Popup />
+
       </div>
     </div>
   );

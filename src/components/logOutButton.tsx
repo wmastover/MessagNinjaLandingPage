@@ -18,7 +18,7 @@ export const LogoutButton: React.FC<Props> = ( {setClicked} ) => {
   };
 
   return (
-    <button onClick={handleLogout} className='topRightButton'>Log Out</button>
+    <div onClick={handleLogout} className='topRightButton'>Log Out</div>
   );
 };
 
