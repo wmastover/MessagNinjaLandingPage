@@ -2,7 +2,7 @@ import React from 'react';
 
 export const LoadingLine = () => {
     
-  const linkedInProfileUrl = 'https://www.linkedin.com/in/william-mathews-90513419a/';
+  const linkedInProfileUrl = 'https://www.linkedin.com/in/me/';
 
   return (
     <div>

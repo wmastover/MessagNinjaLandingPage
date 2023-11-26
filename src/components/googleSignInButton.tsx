@@ -2,7 +2,7 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { signInWithPopup, onAuthStateChanged } from 'firebase/auth';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, googleAuthProvider } from '../functions/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/authSlice';
@@ -18,14 +18,26 @@ export const GoogleSignInButton: React.FC = () => {
         const { uid, displayName, email, photoURL } = firebaseUser;
         dispatch(setUser({ uid, displayName, email, photoURL }));
 
-        // Set user document in Firestore
-        setDoc(doc(firestore, "users", uid), { displayName, email, photoURL, paid: false, credits: 20 })
-          .then(() => {
-            console.log("User document successfully written!");
-          })
-          .catch((error) => {
-            console.error("Error writing user document: ", error);
-          });
+        // Set user document in Firestore only if it doesn't exist or doesn't have "paid" or "credits" field
+        const userDocRef = doc(firestore, "users", uid);
+        getDoc(userDocRef).then((docSnapshot) => {
+          
+          // Check if the document exists or if it doesn't have the 'paid' or 'credits' properties
+          if (!docSnapshot.exists() || !docSnapshot.data().hasOwnProperty('paid') || !docSnapshot.data().hasOwnProperty('credits')) {
+            // Get the current time
+            const currentTime = new Date().toISOString();
+            // Set the document with the user's details, paid status, credits, and creation time
+            setDoc(userDocRef, { displayName, email, photoURL, paid: false, credits: 1000, createdAt: currentTime })
+              .then(() => {
+                // Log a success message if the document was written successfully
+                console.log("User document successfully written!");
+              })
+              .catch((error) => {
+                // Log an error message if there was an error writing the document
+                console.error("Error writing user document: ", error);
+              });
+          }
+        });
 
         // Call the Firebase function to get a custom token for this user
         const functions = getFunctions();
